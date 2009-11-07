@@ -1,11 +1,16 @@
 Name:           libmimic
 Version:        1.0.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Encoding/decoding library for Mimic V2.x
 Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://farsight.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/farsight/%{name}-%{version}.tar.gz
+# To regenerate:
+# make <arch>
+# cd libmimic-%{version}/doc/api
+# tar cvfz ../../../libmimic-%{version}-pregenerated-docs.tar.gz html
+Source1:        libmimic-%{version}-pregenerated-docs.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  doxygen glib2-devel
 
@@ -26,7 +31,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q
+%setup -q -a 1
 
 
 %build
@@ -56,13 +61,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(-,root,root,-)
-%doc doc/api/html
+%doc html
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libmimic.pc
 
 
 %changelog
+* Sat Nov  7 2009 Hans de Goede <j.w.r.degoede@hhs.nl> 1.0.4-4
+- Fix multilib conflict in -devel package (rf858)
+
 * Fri Aug  7 2009 Hans de Goede <j.w.r.degoede@hhs.nl> 1.0.4-3
 - Actually link to glib-2.0 not the ancient glib (issue
   caused by the undefined-non-weak-symbol fix) (rf487)
