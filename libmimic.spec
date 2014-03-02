@@ -1,17 +1,11 @@
 Name:           libmimic
 Version:        1.0.4
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Encoding/decoding library for Mimic V2.x
 Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://farsight.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/farsight/%{name}-%{version}.tar.gz
-# To regenerate:
-# make <arch>
-# cd libmimic-%{version}/doc/api
-# tar cvfz ../../../libmimic-%{version}-pregenerated-docs.tar.gz html
-Source1:        libmimic-%{version}-pregenerated-docs.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  doxygen glib2-devel
 
 %description
@@ -31,7 +25,7 @@ developing applications that use %{name}.
 
 
 %prep
-%setup -q -a 1
+%setup -q
 
 
 %build
@@ -40,13 +34,8 @@ make %{?_smp_mflags} libmimic_la_LIBADD="-lglib-2.0 -lm"
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
-
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %post -p /sbin/ldconfig
@@ -55,19 +44,20 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS COPYING README
 %{_libdir}/*.so.*
 
 %files devel
-%defattr(-,root,root,-)
-%doc html
+%doc doc/api/html
 %{_includedir}/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/libmimic.pc
 
 
 %changelog
+* Sun Mar 02 2014 Hans de Goede <j.w.r.degoede@gmail.com> - 1.0.4-7
+- Stop using pre-built docs (rf3114)
+
 * Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.0.4-6
 - Mass rebuilt for Fedora 19 Features
 
