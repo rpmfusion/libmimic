@@ -1,6 +1,6 @@
 Name:           libmimic
 Version:        1.0.4
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Encoding/decoding library for Mimic V2.x
 Group:          System Environment/Libraries
 License:        LGPLv2+
@@ -55,6 +55,9 @@ find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.0.4-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Sun Mar 19 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.0.4-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
