@@ -6,7 +6,7 @@ Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://farsight.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/farsight/%{name}-%{version}.tar.gz
-BuildRequires:  doxygen glib2-devel gcc
+BuildRequires:  doxygen glib2-devel gcc-c++
 
 %description
 libmimic is an open source video encoding/decoding library for Mimic V2.x-
