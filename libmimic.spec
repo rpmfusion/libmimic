@@ -2,7 +2,6 @@ Name:           libmimic
 Version:        1.0.4
 Release:        13%{?dist}
 Summary:        Encoding/decoding library for Mimic V2.x
-Group:          System Environment/Libraries
 License:        LGPLv2+
 URL:            http://farsight.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/farsight/%{name}-%{version}.tar.gz
@@ -16,7 +15,6 @@ for webcam conversations.
 
 %package        devel
 Summary:        Development files for %{name}
-Group:          Development/Libraries
 Requires:       %{name} = %{version}-%{release}, pkgconfig
 
 %description    devel
@@ -30,21 +28,20 @@ developing applications that use %{name}.
 
 %build
 %configure --disable-static
-make %{?_smp_mflags} libmimic_la_LIBADD="-lglib-2.0 -lm"
+%make_build libmimic_la_LIBADD="-lglib-2.0 -lm"
 
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT
-find $RPM_BUILD_ROOT -name '*.la' -exec rm -f {} ';'
+%make_install
+find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 
 %files
-%doc AUTHORS COPYING README
+%doc AUTHORS README
+%license COPYING
 %{_libdir}/*.so.*
 
 %files devel
