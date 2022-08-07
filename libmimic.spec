@@ -1,6 +1,6 @@
 Name:           libmimic
 Version:        1.0.4
-Release:        20%{?dist}
+Release:        21%{?dist}
 Summary:        Encoding/decoding library for Mimic V2.x
 License:        LGPLv2+
 URL:            http://farsight.sourceforge.net/
@@ -52,6 +52,10 @@ find %{buildroot} -name '*.la' -exec rm -f {} ';'
 
 
 %changelog
+* Sun Aug 07 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.0.4-21
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
+  5.1
+
 * Wed Feb 09 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.0.4-20
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
